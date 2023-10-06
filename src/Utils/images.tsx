@@ -1,3 +1,4 @@
+export const profile = require('../Assets/Images/user.png');
 export const logo = require('../Assets/Images/logo.png');
 export const Store = require('../Assets/Images/store.jpeg');
 export const logo_White = require('../Assets/Images/logo_White.png');

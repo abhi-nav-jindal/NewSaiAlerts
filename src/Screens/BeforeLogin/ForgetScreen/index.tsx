@@ -8,7 +8,7 @@ import EditText from '../../../Components/EditText';
 import Button from '../../../Components/Button';
 import {styles} from './styles';
 
-const ForgotScreen = () => {
+const ForgetScreen = () => {
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView style={styles.container}>
@@ -27,4 +27,4 @@ const ForgotScreen = () => {
   );
 };
 
-export default ForgotScreen;
+export default ForgetScreen;

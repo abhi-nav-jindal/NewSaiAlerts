@@ -9,7 +9,7 @@ const InputField = (props: any) => {
       style={[style, {paddingVertical: 0}]}
       label={label}
       multiline={multiline}
-      theme={{colors: {primary: 'red', underlineColor: 'transparent'}}}
+      theme={{colors: {primary: 'red'}}}
       onChangeText={onChangeText}
       mode="outlined"
       right={right}

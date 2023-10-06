@@ -12,9 +12,11 @@ import Button from '../../../Components/Button';
 import {styles} from './styles';
 import {logo} from '../../../Utils/images';
 import {Loader} from '../../../Components/Loader';
+import {Route} from '../../../Navigation/constants';
+import {loginValidation} from '../../../Validation';
 
 const LoginScreen = () => {
-  // const navigation = useNavigation<any>();
+  const navigation = useNavigation<any>();
   // const dispatch = useDispatch<any>();
   // const loginData = useSelector((state: any) => state.loginReducer);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -23,34 +25,34 @@ const LoginScreen = () => {
     password: '',
   });
 
-//   const login = () => {
-//     const valid = loginValidation(textField);
-//     if (valid) {
-//       dispatch({
-//         type: Login_Failure,
-//         payload: true,
-//       });
-//       Storage.getData('fcmToken')
-//         .then(res => {
-//           if (res) {
-//             dispatch(loginAction({...textField, deviceid: res}));
-//           } else {
-//             dispatch({
-//               type: Login_Failure,
-//               payload: false,
-//             });
-//             Alert.alert('Alert', 'Something went wrong');
-//           }
-//         })
-//         .catch(err => {
-//           console.log('Error: ', err);
-//           dispatch({
-//             type: Login_Failure,
-//             payload: false,
-//           });
-//         });
-//     }
-//   };
+  const login = () => {
+    const valid = loginValidation(textField);
+    // if (valid) {
+    //   dispatch({
+    //     type: Login_Failure,
+    //     payload: true,
+    //   });
+    //   Storage.getData('fcmToken')
+    //     .then(res => {
+    //       if (res) {
+    //         dispatch(loginAction({...textField, deviceid: res}));
+    //       } else {
+    //         dispatch({
+    //           type: Login_Failure,
+    //           payload: false,
+    //         });
+    //         Alert.alert('Alert', 'Something went wrong');
+    //       }
+    //     })
+    //     .catch(err => {
+    //       console.log('Error: ', err);
+    //       dispatch({
+    //         type: Login_Failure,
+    //         payload: false,
+    //       });
+    //     });
+    // }
+  };
 
   return (
     <KeyboardAwareScrollView>
@@ -96,7 +98,7 @@ const LoginScreen = () => {
               title="Forgot Password?"
               btnStyle={{color: '#BF6739', fontSize: hp(2)}}
               onPress={() => {
-                // navigation.navigate(Route.Forgot);
+                navigation.navigate(Route.Forget);
               }}
             />
           </View>
@@ -107,7 +109,7 @@ const LoginScreen = () => {
               fontWeight: 'bold',
             }}
             title="Sign in"
-            // onPress={login}
+            onPress={login}
           />
         </View>
       </SafeAreaView>

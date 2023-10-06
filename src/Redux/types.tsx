@@ -1,0 +1,14 @@
+export const Get_Login = 'Get_Login';
+export const Login_Success = 'Login_Success';
+export const Logout_Success = 'Logout_Success';
+export const Logout_Failure = 'Logout_Failure';
+export const Loader = 'Loader';
+export const Loading = 'Loading';
+export const Login_Failure = 'Login_Failure';
+export const OTP_Verify = 'OTP_Verify';
+export const Dashboard_Count = 'Dashboard_Count';
+export const UnAttended_Record_Fetch = 'UnAttended_Record_Fetch';
+export const UnAttended_Record_Failure = 'UnAttended_Record_Failure';
+export const Attended_Record_Fetch = 'Attended_Record_Fetch';
+export const Attended_Record_Failure = 'Attended_Record_Failure';
+export const SelectionHeader_Type = 'SelectionHeader_Type';

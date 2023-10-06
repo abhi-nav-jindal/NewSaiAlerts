@@ -2,7 +2,7 @@ import {View, Image, Text, SafeAreaView} from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-// import OTPInputView from '@twotalltotems/react-native-otp-input';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 //user-define Import files
 import {logo} from '../../../Utils/images';
@@ -40,7 +40,7 @@ const OtpScreen = () => {
         </View>
         <Text style={styles.otpVerify}>OTP Verification</Text>
         <Text style={styles.enterOtp}>Enter Otp Here</Text>
-        {/* <OTPInputView
+        <OTPInputView
           style={styles.otpContainer}
           code={otpData}
           pinCount={4}
@@ -51,8 +51,7 @@ const OtpScreen = () => {
           autoFocusOnLoad={false}
           codeInputFieldStyle={styles.otpFilled}
           codeInputHighlightStyle={styles.otpInputHighlight}
-        /> */}
-
+        />
         <Button
           style={styles.verifyBtn}
           btnStyle={styles.btn}
