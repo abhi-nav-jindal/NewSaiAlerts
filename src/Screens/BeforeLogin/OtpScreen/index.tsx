@@ -8,27 +8,27 @@ import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {logo} from '../../../Utils/images';
 import Button from '../../../Components/Button';
 import {styles} from './styles';
-// import {optVerify} from '../../../Redux/Actions/otpVerifyAction';
+import {optVerify} from '../../../Redux/Actions/otpVerifyAction';
 import {Loader} from '../../../Components/Loader';
-// import {Logout_Failure} from '../../../Redux/types';
+import {Logout_Failure} from '../../../Redux/types';
 
 const OtpScreen = () => {
-//   const loginRecord = useSelector((state: any) => state.loginReducer);
-//   const dispatch = useDispatch<any>();
+  const loginRecord = useSelector((state: any) => state.loginReducer);
+  const dispatch = useDispatch<any>();
   const [otpData, setOtp] = useState<any>('');
 
-//   const verify = () => {
-//     dispatch({
-//       type: Logout_Failure,
-//       payload: false,
-//     });
-//     const data = {
-//       phone_number: loginRecord?.loginData?.data?.mobile_number,
-//       country_code: loginRecord?.loginData?.data?.country_code,
-//       token: otpData,
-//     };
-//     dispatch(optVerify(data, loginRecord?.loginData));
-//   };
+  const verify = () => {
+    dispatch({
+      type: Logout_Failure,
+      payload: false,
+    });
+    const data = {
+      phone_number: loginRecord?.loginData?.data?.mobile_number,
+      country_code: loginRecord?.loginData?.data?.country_code,
+      token: otpData,
+    };
+    dispatch(optVerify(data, loginRecord?.loginData));
+  };
 
   return (
     <KeyboardAwareScrollView>
@@ -56,7 +56,7 @@ const OtpScreen = () => {
           style={styles.verifyBtn}
           btnStyle={styles.btn}
           title="Verify"
-        //   onPress={verify}
+          onPress={verify}
         />
       </SafeAreaView>
     </KeyboardAwareScrollView>

@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
-// import {useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 //user-define Import files
 import AttendedScreen from '../AttendedScreen';
@@ -17,27 +17,26 @@ import {styles} from './styles';
 const Tab = createMaterialTopTabNavigator();
 
 const AttendSelection = () => {
-//   const navigation = useNavigation<any>();
-//   const selectionHeader = useSelector(
-//     (state: any) => state.SelectionHeaderReducer,
-//   );
+  const navigation = useNavigation<any>();
+  const selectionHeader = useSelector(
+    (state: any) => state.SelectionHeaderReducer,
+  );
 
-//   const {type, icon} = selectionHeader;
+  const {type, icon} = selectionHeader;
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
         <View style={styles.headersView}>
           <View style={styles.headerView}>
-            {/* <Image source={icon} style={styles.img} />
-            <Text style={styles.headerText}>{type}</Text> */}
+            <Image source={icon} style={styles.img} />
+            <Text style={styles.headerText}>{type}</Text>
           </View>
           <TouchableOpacity
             style={styles.headerBtn}
-            // onPress={() => {
-            //   navigation.replace('Home');
-            // }}
-            >
+            onPress={() => {
+              navigation.replace('Home');
+            }}>
             <Image source={logo_White} style={styles.imgBtn} />
           </TouchableOpacity>
         </View>

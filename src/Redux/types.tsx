@@ -12,3 +12,7 @@ export const UnAttended_Record_Failure = 'UnAttended_Record_Failure';
 export const Attended_Record_Fetch = 'Attended_Record_Fetch';
 export const Attended_Record_Failure = 'Attended_Record_Failure';
 export const SelectionHeader_Type = 'SelectionHeader_Type';
+export const Login_Request = 'Login_Request';
+export const Add_Image_Action = 'Add_Image_Action';
+export const Add_Image_Request = 'Add_Request';
+export const Failed_Image_Action = 'Failed_Image_Action';

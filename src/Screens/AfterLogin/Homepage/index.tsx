@@ -8,6 +8,12 @@ import {
   AppState,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 //user-define Import files
 import {
@@ -30,35 +36,48 @@ import Cart from '../../../Components/Cart';
 import Button from '../../../Components/Button';
 import {styles} from './styles';
 import {Loader} from '../../../Components/Loader';
-
-
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {Logout_Failure, SelectionHeader_Type} from '../../../Redux/types';
+import {Route} from '../../../Navigation/constants';
+import {logoutAction} from '../../../Redux/Actions/login';
+import {dashboardCountAction} from '../../../Redux/Actions/dashboardCountAction';
 
 const HomeScreen = () => {
-//   const {authStatus} = useSelector((state: any) => state.loginReducer);
-//   const {loading, countData} = useSelector(
-//     (state: any) => state.dashboardCountReducer,
-//   );
-  // const navigation = useNavigation<any>();
-  // const dispatch = useDispatch<any>();
+  const {authStatus} = useSelector((state: any) => state.loginReducer);
+  const {loading, countData} = useSelector(
+    (state: any) => state.dashboardCountReducer,
+  );
+  const navigation = useNavigation<any>();
+  const dispatch = useDispatch<any>();
   const [logoutBtn, setLogoutBtn] = useState<boolean>(false);
 
   useEffect(() => {
-    // dispatch(dashboardCountAction());
+    dispatch(dashboardCountAction());
   }, []);
 
+  const cartPress = (type: string, icon: number) => {
+    dispatch({
+      type: SelectionHeader_Type,
+      payload: {type, icon},
+    });
+    navigation.navigate(Route.AttendSelection);
+  };
+
+  const logout = () => {
+    dispatch({
+      type: Logout_Failure,
+      payload: false,
+    });
+    dispatch(logoutAction(authStatus?.data?.user_id));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header1}>
-        {/* <Loader visible={loading} /> */}
+        <Loader visible={loading} />
         <View style={styles.imgView}>
           <Image source={logo} style={styles.img} />
           <View style={styles.profileBtnView}>
-            {/* <Text style={styles.nameTxt}>{authStatus?.data?.username}</Text> */}
+            <Text style={styles.nameTxt}>{authStatus?.data?.username}</Text>
             <TouchableOpacity
               onPress={() => {
                 setLogoutBtn(!logoutBtn);
@@ -74,13 +93,13 @@ const HomeScreen = () => {
               style={[styles.headerTxt, {color: 'grey', fontSize: hp(2.5)}]}>
               Welcome to
             </Text>
-            {/* <Text style={styles.headerTxt}>
+            <Text style={styles.headerTxt}>
               {authStatus?.data?.user_stores[0]?.name}
-            </Text> */}
+            </Text>
           </View>
           {logoutBtn ? (
             <Button
-              // onPress={logout}
+              onPress={logout}
               style={styles.logoutBtn}
               btnStyle={{
                 color: 'red',
@@ -94,55 +113,55 @@ const HomeScreen = () => {
         <View style={styles.cartView1}>
           <View style={styles.cartView2}>
             <Cart
-              // onPress={() => {
-              //   cartPress('Theft', theftWhite);
-              // }}
+              onPress={() => {
+                cartPress('Theft', theftWhite);
+              }}
               icon={theft}
-            //   count={countData?.theft_count}
+              count={countData?.theft_count}
               type="Theft"
             />
             <Cart
-              // onPress={() => {
-              //   cartPress('Active', activeWhite);
-              // }}
+              onPress={() => {
+                cartPress('Active', activeWhite);
+              }}
               icon={active}
-            //   count={countData?.active_count}
+              count={countData?.active_count}
               type="Active"
             />
           </View>
           <View style={styles.cartView2}>
             <Cart
-              // onPress={() => {
-              //   cartPress('Clutter', clutterWhite);
-              // }}
+              onPress={() => {
+                cartPress('Clutter', clutterWhite);
+              }}
               icon={clutter}
-            //   count={countData?.clutter_count}
+              count={countData?.clutter_count}
               type="Clutter"
             />
             <Cart
-              // onPress={() => {
-              //   cartPress('Stock', stockWhite);
-              // }}
+              onPress={() => {
+                cartPress('Stock', stockWhite);
+              }}
               icon={stock}
-            //   count={countData?.stock_count}
+              count={countData?.stock_count}
               type="Stock"
             />
           </View>
           <View style={styles.cartView2}>
             <Cart
-              // onPress={() => {
-              //   cartPress('Queue', queueWhite);
-              // }}
+              onPress={() => {
+                cartPress('Queue', queueWhite);
+              }}
               icon={queue}
-            //   count={countData?.queue_count}
+              count={countData?.queue_count}
               type="Queue"
             />
             <Cart
-              // onPress={() => {
-              //   cartPress('Theft', scoWhite);
-              // }}
+              onPress={() => {
+                cartPress('Theft', scoWhite);
+              }}
               icon={sco}
-            //   count={countData?.queue_count}
+              count={countData?.queue_count}
               type="SCO"
             />
           </View>

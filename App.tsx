@@ -7,9 +7,9 @@ import {store} from './src/Redux/store';
 
 const App = () => {
   return (
-    // <Provider store={store}>
-    <Navigator />
-    // </Provider>
+    <Provider store={store}>
+      <Navigator />
+    </Provider>
   );
 };
 

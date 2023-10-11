@@ -1,5 +1,5 @@
 import {View, Text, Image, Alert, SafeAreaView} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -14,50 +14,62 @@ import {logo} from '../../../Utils/images';
 import {Loader} from '../../../Components/Loader';
 import {Route} from '../../../Navigation/constants';
 import {loginValidation} from '../../../Validation';
+import {Login_Failure} from '../../../Redux/types';
+import {loginAction} from '../../../Redux/Actions/login';
+import * as Storage from '../../../Services/AsyncStoreConfig';
 
 const LoginScreen = () => {
   const navigation = useNavigation<any>();
-  // const dispatch = useDispatch<any>();
-  // const loginData = useSelector((state: any) => state.loginReducer);
+  const dispatch = useDispatch<any>();
+  const loginData = useSelector((state: any) => state.loginReducer);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [textField, setTextFields] = useState({
     username: '',
     password: '',
   });
 
+  useEffect(() => {
+    Storage.saveData('fcmToken', 'sdfsdfjdskf');
+  }, []);
+
   const login = () => {
     const valid = loginValidation(textField);
-    // if (valid) {
-    //   dispatch({
-    //     type: Login_Failure,
-    //     payload: true,
-    //   });
-    //   Storage.getData('fcmToken')
-    //     .then(res => {
-    //       if (res) {
-    //         dispatch(loginAction({...textField, deviceid: res}));
-    //       } else {
-    //         dispatch({
-    //           type: Login_Failure,
-    //           payload: false,
-    //         });
-    //         Alert.alert('Alert', 'Something went wrong');
-    //       }
-    //     })
-    //     .catch(err => {
-    //       console.log('Error: ', err);
-    //       dispatch({
-    //         type: Login_Failure,
-    //         payload: false,
-    //       });
-    //     });
-    // }
+    if (valid) {
+      dispatch({
+        type: Login_Failure,
+        payload: true,
+      });
+      Storage.getData('fcmToken')
+        .then(res => {
+          if (res) {
+            dispatch(
+              loginAction({
+                ...textField,
+                deviceid: res,
+              }),
+            );
+          } else {
+            dispatch({
+              type: Login_Failure,
+              payload: false,
+            });
+            Alert.alert('Alert', 'Something went wrong');
+          }
+        })
+        .catch(err => {
+          console.log('Error: ', err);
+          dispatch({
+            type: Login_Failure,
+            payload: false,
+          });
+        });
+    }
   };
 
   return (
     <KeyboardAwareScrollView>
       <SafeAreaView style={styles.container}>
-        {/* <Loader visible={loginData?.isLoading} /> */}
+        <Loader visible={loginData?.isLoading} />
         <View style={styles.logoView}>
           <Text style={styles.logoText}>SAI</Text>
           <Image source={logo} style={styles.logoImg} />
@@ -102,7 +114,6 @@ const LoginScreen = () => {
               }}
             />
           </View>
-
           <Button
             style={styles.loginBtn}
             btnStyle={{

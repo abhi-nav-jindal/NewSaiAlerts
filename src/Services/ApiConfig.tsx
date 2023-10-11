@@ -32,3 +32,6 @@ export const attendedQueueUpdateURL = `/update_queue_detail_new`;
 export const getAttendedQueueURL = `/get_filed_queue_detail_new`;
 
 export const firebase_Update_URL = `/add_user_token_new`;
+
+export const help_Update_URL = `/get_store_images`;
+export const add_Image_URl = `/add_help_data`;
